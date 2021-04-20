@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 function App() {
+  const [titleRef, titleInView] = useInView({
+    triggerOnce: true,
+    rootMargin: '-100px 0px',
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="firstSection">
+        <motion.h1 animate={{ scale: [0, 1] }} transition={{ duration: 0.5 }}>
+          First section
+        </motion.h1>
+      </div>
+      <div className="secondSection">
+        <motion.h1 ref={titleRef} animate={{ scale: titleInView ? 1 : 0 }} transition={{ duration: 0.5 }}>
+          Second section
+        </motion.h1>
+      </div>
+    </>
   );
 }
 
